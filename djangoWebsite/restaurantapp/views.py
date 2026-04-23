@@ -9,7 +9,11 @@ def home(request):
 
 def menu(request):
     items = FoodItems.objects.all()
-    return render(request, "menu.html", {"food_items": items})
+    types = FoodItems.objects.values_list('Type', flat=True).distinct()
+    return render(request, "menu.html", {
+        "food_items": items,
+        "food_types": types
+    })
 
 
 def book(request):
