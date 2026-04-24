@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: djangoWebsite
 
     steps:
       - uses: actions/checkout@v4
@@ -34,5 +37,5 @@ jobs:
         with:
           name: reports
           path: |
-            test-report.html
-            flake-report
+            djangoWebsite/test-report.html
+            djangoWebsite/flake-report
