@@ -21,7 +21,7 @@ class TestViews(TestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_menu_contains_food(self):
-        items = FoodItems.objects.create(
+        FoodItems.objects.create(
             Name="Test Burger",
             Type="Meat",
             Ingredients=[("Burger")],
