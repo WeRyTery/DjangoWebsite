@@ -20,5 +20,3 @@ class FoodItems(models.Model):
     Calories = models.IntegerField()
     Price = models.FloatField(max_length=20)
     Image_path = models.CharField(max_length=200)
-
-# TODO: Add images
