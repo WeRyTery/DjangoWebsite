@@ -129,6 +129,29 @@
                     <h2>Our Menu</h2>
                 </div>
 
+                <div class="row justify-content-center mt-3 mb-0">
+                    <div class="col-md-6 text-center" style="min-height: 75px;">
+                        <div class="input-group shadow-sm" style="border-radius: 25px; overflow: hidden;">
+                            <input type="text" 
+                                   id="searchInput" 
+                                   class="form-control" 
+                                   placeholder="Search dishes by name..." 
+                                   style="border: 1px solid #ced4da; border-right: none; border-radius: 25px 0 0 25px; padding-left: 20px;">
+                            <div class="input-group-append">
+                                <button class="btn btn-warning" 
+                                        type="button" 
+                                        id="searchBtn"
+                                        style="color: white; border-radius: 0 25px 25px 0; padding: 0 25px;">
+                                    Search
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mt-1" id="clearSearchBlock" style="display: none;">
+                            <a href="javascript:void(0);" id="clearBtn" class="text-secondary" style="font-size: 13px; text-decoration: underline;">Clear search results</a>
+                        </div>
+                    </div>
+                </div>
+                
                 <ul class="filters_menu">
                     <li class="active" data-filter="*">All</li>
                     {% for type in food_types %}

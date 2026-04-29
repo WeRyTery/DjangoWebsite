@@ -10,23 +10,71 @@ getYear();
 
 // isotope js
 $(window).on('load', function () {
-    $('.filters_menu li').click(function () {
-        $('.filters_menu li').removeClass('active');
-        $(this).addClass('active');
-
-        var data = $(this).attr('data-filter');
-        $grid.isotope({
-            filter: data
-        })
-    });
-
     var $grid = $(".grid").isotope({
         itemSelector: ".all",
         percentPosition: false,
         masonry: {
             columnWidth: ".all"
         }
-    })
+    });
+
+    var currentCategory = '*';
+    var currentSearch = '';
+
+    // Apply both category and text filters
+    function applyFilters() {
+        $grid.isotope({
+            filter: function() {
+                var $this = $(this);
+                
+                // Category check
+                var categoryMatch = currentCategory === '*' ? true : $this.is(currentCategory);
+                
+                // Text check (searching inside h5)
+                var title = $this.find('h5').text().toLowerCase();
+                var searchMatch = currentSearch === '' ? true : title.indexOf(currentSearch) !== -1;
+                
+                return categoryMatch && searchMatch;
+            }
+        });
+    }
+
+    // Category click
+    $('.filters_menu li').click(function () {
+        $('.filters_menu li').removeClass('active');
+        $(this).addClass('active');
+
+        currentCategory = $(this).attr('data-filter');
+        applyFilters();
+    });
+
+    // Search input trigger ('input' catches typing, pasting, clearing)
+    $('#searchInput').on('input', function() {
+        currentSearch = $(this).val().toLowerCase().trim();
+        applyFilters();
+        
+        // Show/hide clear button
+        if (currentSearch.length > 0) {
+            $('#clearSearchBlock').fadeIn(200);
+        } else {
+            $('#clearSearchBlock').fadeOut(200);
+        }
+    });
+
+    // Prevent Enter key from refreshing the page
+    $('#searchInput').keypress(function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+        }
+    });
+
+    // Clear search button
+    $('#clearBtn').click(function() {
+        $('#searchInput').val('');
+        currentSearch = '';
+        applyFilters();
+        $('#clearSearchBlock').fadeOut(200);
+    });
 });
 
 // nice select

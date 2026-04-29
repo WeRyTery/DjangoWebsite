@@ -8,11 +8,19 @@ def home(request):
 
 
 def menu(request):
+    query = request.GET.get('q', '')
+    
     items = FoodItems.objects.all()
+    
+    if query:
+        items = items.filter(Name__icontains=query)
+
     types = FoodItems.objects.values_list('Type', flat=True).distinct()
+    
     return render(request, "menu.html", {
         "food_items": items,
-        "food_types": types
+        "food_types": types,
+        "search_query": query  
     })
 
 
