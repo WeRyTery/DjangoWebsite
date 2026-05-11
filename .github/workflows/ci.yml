@@ -7,9 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: djangoWebsite
 
     services:
       postgres:
@@ -40,10 +37,12 @@ jobs:
           pip install pytest-django pytest-html flake8 flake8-html
 
       - name: Run tests
+        working-directory: djangoWebsite
         run: |
           pytest --html=test-report.html
 
       - name: Run flake8
+        working-directory: djangoWebsite
         run: |
           flake8 . --format=html --htmldir=flake-report
 
