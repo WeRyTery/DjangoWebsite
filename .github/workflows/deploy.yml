@@ -21,5 +21,6 @@ jobs:
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
         run: |
+          echo "machine git.heroku.com login heroku password $HEROKU_API_KEY" > ~/.netrc
           heroku git:remote -a ${{ secrets.HEROKU_APP_NAME }}
           git push heroku main --force
