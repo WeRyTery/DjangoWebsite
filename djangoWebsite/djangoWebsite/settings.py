@@ -1,4 +1,5 @@
 import os
+import dj_database_url
 
 """
 Django settings for djangoWebsite project.
@@ -85,14 +86,10 @@ WSGI_APPLICATION = "djangoWebsite.wsgi.application"
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'django_food_menu',
-        'USER': 'postgres',
-        'PASSWORD': 'qweryTest001',
-        'HOST': 'localhost',
-        'PORT': '5432',
-    }
+    'default': dj_database_url.config(
+        default='postgresql://postgres:qweryTest001@localhost:5432/django_food_menu',
+        conn_max_age=600,
+    )
 }
 
 
