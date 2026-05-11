@@ -17,14 +17,15 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from django.http import HttpResponse
+from django.shortcuts import redirect
 
 
 def home(request):
-    return HttpResponse("Main home")
+    return redirect('/NewStyle-restaurant/')
 
 
 urlpatterns = [
+    path('', home),
     path("admin/", admin.site.urls),
     path("NewStyle-restaurant/", include("restaurantapp.urls"))
 ]
